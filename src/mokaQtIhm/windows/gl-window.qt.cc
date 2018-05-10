@@ -284,9 +284,9 @@ void GLWindow :: mousePressEvent(QMouseEvent * eb)
                                           FViewId, int (eb -> x()), y) ;
             break;
          case Qt::MidButton :  // bouton milieu
-            controler ->
-            operationModeIndependentStart(MODE_OPERATION_SCENE_ROTATION,
-                                          FViewId, int(eb->x()), y);
+            FOwner -> getControler() -> lookAtMouseClick(FViewId, eb -> x(), y);
+            repaint();
+
             break;
          case Qt::RightButton : // bouton droit
             controler ->
@@ -350,8 +350,9 @@ void GLWindow :: mousePressEvent(QMouseEvent * eb)
       }
       else if (eb -> button() == Qt :: RightButton)
       {
-         FOwner -> getControler() -> lookAtMouseClick(FViewId, eb -> x(), y);
-         repaint();
+          controler ->
+          operationModeIndependentStart(MODE_OPERATION_SCENE_ROTATION,
+                                        FViewId, int(eb->x()), y);
       }
    }
 }
